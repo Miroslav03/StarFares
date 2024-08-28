@@ -1,6 +1,6 @@
-import { CutomError } from "./custom-error";
+import { CustomError } from "./custom-error";
 
-export class DatabaseConnectionError extends CutomError {
+export class DatabaseConnectionError extends CustomError {
     statusCode = 500;
     reason = "Error connection to database";
 
