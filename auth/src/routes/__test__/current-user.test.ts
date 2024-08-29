@@ -5,7 +5,7 @@ it("Response with details about the current user", async () => {
     const cookie = await global.signup();
 
     const response = await request(app)
-        .post("/api/users/currentuser")
+        .get("/api/users/currentuser")
         .set("Cookie", cookie!)
         .send()
         .expect(200);
@@ -15,7 +15,7 @@ it("Response with details about the current user", async () => {
 
 it("Response with null if not authenticated", async () => {
     const response = await request(app)
-        .post("/api/users/currentuser")
+        .get("/api/users/currentuser")
         .send()
         .expect(200);
 
