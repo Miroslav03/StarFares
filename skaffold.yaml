@@ -10,6 +10,16 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
+    - image: miroslavbg/client
+      context: client
+      sync:
+        manual:
+          - src: app/**/*.tsx      
+            dest: .
+          - src: app/**/*.ts      
+            dest: .
+      docker:
+        dockerfile: Dockerfile
   local:
     push: false
 manifests:
