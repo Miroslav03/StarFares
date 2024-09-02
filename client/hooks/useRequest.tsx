@@ -5,10 +5,15 @@ interface BodyData {
     email: string;
     password: string;
 }
+interface UserResponse {
+    id: string;
+    email: string;
+}
 interface UseRequestProps {
     url: string;
     method: "get" | "post" | "put" | "delete";
     body?: BodyData;
+    onSuccess?: (data: UserResponse) => void;
 }
 interface SerializedError {
     message: string;
@@ -17,13 +22,21 @@ interface SerializedError {
 interface ErrorResponse {
     errors: SerializedError[];
 }
-export default function useRequest({ url, method, body }: UseRequestProps) {
+export default function useRequest({
+    url,
+    method,
+    body,
+    onSuccess,
+}: UseRequestProps) {
     const [errors, setErrors] = useState<JSX.Element | null>(null);
 
-    const doRequest = async () => {
+    const doRequest = async (): Promise<UserResponse | void> => {
         try {
             const response = await axios[method](url, body);
             setErrors(null);
+            if (onSuccess) {
+                onSuccess(response.data);
+            }
             return response.data;
         } catch (error) {
             const axiosError = error as AxiosError<ErrorResponse>;
@@ -32,11 +45,7 @@ export default function useRequest({ url, method, body }: UseRequestProps) {
                     <div className="mt-2">
                         {axiosError.response.data.errors.map(
                             (error: SerializedError, index: number) => (
-                                <p
-                                    key={index}
-                                >
-                                    {error.message}
-                                </p>
+                                <p key={index}>{error.message}</p>
                             )
                         )}
                     </div>

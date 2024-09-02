@@ -1,19 +1,22 @@
 "use client";
 import { useState, FormEvent } from "react";
 import useRequest from "@/hooks/useRequest";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { doRequest, errors } = useRequest({
         url: "/api/users/signup",
         method: "post",
         body: { email, password },
+        onSuccess: () => router.push("/"),
     });
-    
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        doRequest();
+        await doRequest();
     };
 
     return (
@@ -58,7 +61,7 @@ export default function SignUp() {
                         />
                     </div>
                     <div className="text-[#ff2c2c] text-center text-[0.8rem] mt-1 font-semibold">
-                    {errors}
+                        {errors}
                     </div>
                     <div>
                         <button
