@@ -32,7 +32,9 @@ export default function useRequest({
 
     const doRequest = async (): Promise<UserResponse | void> => {
         try {
-            const response = await axios[method](url, body);
+            const response = await axios[method](url, body, {
+                withCredentials: true,
+            });
             setErrors(null);
             if (onSuccess) {
                 onSuccess(response.data);
