@@ -1,41 +1,61 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+    content: [
+        "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+        "./components/**/*.{js,ts,jsx,tsx,mdx}",
+        "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    ],
+    theme: {
+        colors: {
+            "main-orange-color": "#ff8d09",
+            "main-yellow-color": "#F2D639",
+        },
+        screens: {
+            "2xl": { max: "1535px" },
+            // => @media (max-width: 1535px) { ... }
+
+            xl: { max: "1279px" },
+            // => @media (max-width: 1279px) { ... }
+
+            lg: { max: "1023px" },
+            // => @media (max-width: 1023px) { ... }
+
+            md: { max: "767px" },
+            // => @media (max-width: 767px) { ... }
+
+            sm: { max: "639px" },
+            // => @media (max-width: 639px) { ... }
+        },
     },
-    colors: {
-      'main-background-color':'#efefef',
-      'main-text-color':'#19232a',
-      'main-green-color':'#ccbd82'
+    plugins: [require("daisyui")],
+    daisyui: {
+      themes: [
+        {
+          myDarkTheme: {
+            "primary": "#ffffff",    // Customize primary color
+            "secondary": "#4b5563",  // Customize secondary color
+            "accent": "#22d3ee",     // Customize accent color
+            "neutral": "#111827",    // Customize neutral color
+            "base-100": "#000000",   // Background color (main dark background)
+            "info": "#3abff8",       // Info color
+            "success": "#36d399",    // Success color
+            "warning": "#fbbd23",    // Warning color
+            "error": "#f87272",      // Error color
+          },
+          myLightTheme: {
+            "primary": "#ffffff",    // Customize primary color
+            "secondary": "#4b5563",  // Customize secondary color
+            "accent": "#22d3ee",     // Customize accent color
+            "neutral": "#111827",    // Customize neutral color
+            "base-100": "#ffffff",   // Background color (main dark background)
+            "info": "#3abff8",       // Info color
+            "success": "#36d399",    // Success color
+            "warning": "#fbbd23",    // Warning color
+            "error": "#f87272",      // Error color
+          },
+        },
+      ],
     },
-    screens: {
-      '2xl': {'max': '1535px'},
-      // => @media (max-width: 1535px) { ... }
-
-      'xl': {'max': '1279px'},
-      // => @media (max-width: 1279px) { ... }
-
-      'lg': {'max': '1023px'},
-      // => @media (max-width: 1023px) { ... }
-
-      'md': {'max': '767px'},
-      // => @media (max-width: 767px) { ... }
-
-      'sm': {'max': '639px'},
-      // => @media (max-width: 639px) { ... }
-    }
-  },
-  plugins: [],
 };
 export default config;

@@ -8,7 +8,7 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { doRequest, errors } = useRequest({
-        url: "/api/users/signup",
+        url: "/api/users/signin",
         method: "post",
         body: { email, password },
         onSuccess: () => router.push("/"),
@@ -23,7 +23,7 @@ export default function SignUp() {
         <div className="flex w-full justify-center items-center py-[15rem] ">
             <div className="flex flex-col">
                 <h1 className="font-semibold text-center mb-12 text-3xl ">
-                    Create your account
+                    Sign in your account
                 </h1>
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-2">
@@ -68,11 +68,11 @@ export default function SignUp() {
                             style={{ color: "white" }}
                             className="bg-gradient-to-r from-[#ff8d09] to-[#f2e817] h-[2.4rem] w-full text-sm rounded-[.5rem] font-semibold uppercase mt-6 "
                         >
-                            Sign Up
+                            Sign In
                         </button>
                         <h2 className="mt-3 text-center">
-                            Have an account?
-                            <span className="text-[#f2e817] ml-2">SIGN IN</span>
+                             Don't have an account?
+                            <span className="text-[#f2e817] ml-2">SIGN UP</span>
                         </h2>
                     </div>
                 </form>
