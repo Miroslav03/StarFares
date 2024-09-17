@@ -1,6 +1,30 @@
+import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
+interface HeaderProps {
+    currentUser: {
+        email: string;
+    } | null;
+}
+interface AuthLink {
+    label: string;
+    href: string;
+}
 
-export default function Header() {
+export default function Header({ currentUser }: HeaderProps) {
+    const authList: JSX.Element[] = [
+        !currentUser && { label: "Sign Up", href: "/auth/signup" },
+        !currentUser && { label: "Sign In", href: "/auth/signin" },
+        currentUser && { label: "Sign Out", href: "/auth/signout" },
+    ]
+        .filter((item): item is AuthLink => Boolean(item))
+        .map(({ label, href }) => {
+            return (
+                <li className="list-none mr-3" key={label}>
+                    <Link href={href}>{label}</Link>
+                </li>
+            );
+        });
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -47,22 +71,7 @@ export default function Header() {
                 </a>
             </div>
             <div className="navbar-end">
-                <button className="btn btn-ghost btn-circle">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                    </svg>
-                </button>
+                {authList}
                 <ThemeToggle />
             </div>
         </div>
