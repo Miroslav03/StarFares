@@ -1,9 +1,9 @@
 import axios from "axios";
 import { headers } from "next/headers";
 import { Inter } from "next/font/google";
-import Header from "./components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
+import ClientSideWrapper from "./components/ClientSideWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +25,7 @@ const getUser = async (cookieHeader: string) => {
         );
         return data;
     } catch (error) {
-        return null; 
+        return null;
     }
 };
 
@@ -36,14 +36,14 @@ export default async function RootLayout({
 }) {
     const headersList = headers();
     const cookieHeader = headersList.get("cookie") || "";
-    const userData = await getUser(cookieHeader); 
+    const userData = await getUser(cookieHeader);
 
     return (
         <html lang="en" data-theme="myDarkTheme">
             <body className={inter.className}>
-                <Header currentUser={userData?.currentUser || null} />
+                <ClientSideWrapper initialUserData={userData} />
                 {children}
             </body>
-        </html> 
+        </html>
     );
 }

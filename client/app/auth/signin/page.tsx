@@ -2,7 +2,7 @@
 import { useState, FormEvent } from "react";
 import useRequest from "@/hooks/useRequest";
 import { useRouter } from "next/navigation";
-
+import { mutate } from "swr";
 export default function SignUp() {
     const router = useRouter();
     const [email, setEmail] = useState("");
@@ -11,7 +11,11 @@ export default function SignUp() {
         url: "/api/users/signin",
         method: "post",
         body: { email, password },
-        onSuccess: () => router.push("/"),
+
+        onSuccess: () => {
+            mutate("/api/users/currentuser");
+            router.push("/");
+        },
     });
 
     const handleSubmit = async (e: FormEvent) => {
@@ -71,7 +75,7 @@ export default function SignUp() {
                             Sign In
                         </button>
                         <h2 className="mt-3 text-center">
-                             Don't have an account?
+                            Don't have an account?
                             <span className="text-[#f2e817] ml-2">SIGN UP</span>
                         </h2>
                     </div>

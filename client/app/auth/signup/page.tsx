@@ -2,6 +2,7 @@
 import { useState, FormEvent } from "react";
 import useRequest from "@/hooks/useRequest";
 import { useRouter } from "next/navigation";
+import { mutate } from "swr";
 
 export default function SignUp() {
     const router = useRouter();
@@ -11,7 +12,10 @@ export default function SignUp() {
         url: "/api/users/signup",
         method: "post",
         body: { email, password },
-        onSuccess: () => router.push("/"),
+        onSuccess: () => {
+            mutate("/api/users/currentuser");
+            router.push("/");
+        },
     });
 
     const handleSubmit = async (e: FormEvent) => {
