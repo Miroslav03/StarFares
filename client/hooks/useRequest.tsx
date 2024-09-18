@@ -12,7 +12,7 @@ interface UserResponse {
 interface UseRequestProps {
     url: string;
     method: "get" | "post" | "put" | "delete";
-    body?: BodyData;
+    body?: BodyData | {};
     onSuccess?: (data: UserResponse) => void;
 }
 interface SerializedError {
