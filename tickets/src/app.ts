@@ -7,6 +7,7 @@ import { currentUser, errorHandler, NotFoundError } from "@starfares/common";
 import { createTicketRouter } from "./routes/new";
 import { getOneTicketRouter } from "./routes/get-one";
 import { getAllTicketRouter } from "./routes/get-all";
+import { updateTicketRouter } from "./routes/update";
 
 const app = express();
 app.use(json());
@@ -19,7 +20,8 @@ app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(getOneTicketRouter);
-app.use(getAllTicketRouter)
+app.use(getAllTicketRouter);
+app.use(updateTicketRouter);
 
 app.all("*", async () => {
     throw new NotFoundError();
