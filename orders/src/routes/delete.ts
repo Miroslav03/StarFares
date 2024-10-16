@@ -1,11 +1,33 @@
+import {
+    NotAuthorizedError,
+    NotFoundError,
+    requireAuth,
+} from "@starfares/common";
 import express, { Request, Response } from "express";
+import { Order } from "../models/Order";
+import { OrderStatus } from "@starfares/common";
 
 const router = express.Router();
 
-router.delete("/api/orders/:orderId", async (req: Request, res: Response) => {
-    /* const orders = await Ticket.find({}); */
+router.delete(
+    "/api/orders/:orderId",
+    requireAuth,
+    async (req: Request, res: Response) => {
+        const order = await Order.findById(req.params.orderId);
 
-    /* res.send(orders); */
-});
+        if (!order) {
+            throw new NotFoundError();
+        }
+
+        if (order.userId !== req.currentUser!.id) {
+            throw new NotAuthorizedError();
+        }
+
+        order.status = OrderStatus.Cancelled;
+        await order.save();
+
+        res.status(204).send(order);
+    }
+);
 
 export { router as deleteOneOrdersRouter };
