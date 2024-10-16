@@ -1,5 +1,5 @@
 import { Publisher, OrderCreatedEvent, Subjects } from "@starfares/common";
 
 export class OrderCreatedPublisher extends Publisher<OrderCreatedEvent> {
-    subject: Subjects.TicketCreated = Subjects.TicketCreated;
+    subject: Subjects.OrderCreated = Subjects.OrderCreated;
 }
