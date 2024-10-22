@@ -45,8 +45,9 @@ router.put(
             title: ticket.title,
             price: ticket.price,
             userId: ticket.userId,
+            version: ticket.version,
         });
-        
+
         res.send(ticket);
     }
 );
