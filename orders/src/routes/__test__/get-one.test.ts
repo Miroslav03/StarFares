@@ -3,11 +3,13 @@ import { app } from "../../app";
 import { Ticket } from "../../models/Ticket";
 import { Order } from "../../models/Order";
 import { OrderStatus } from "@starfares/common";
+import mongoose from "mongoose";
 
 it("returns the fetched order", async () => {
     const user = global.signup();
 
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "ticket1",
         price: 20,
     });
@@ -32,6 +34,7 @@ it("returns error if user tries to fetch another's user order", async () => {
     const user1 = global.signup();
 
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "ticket1",
         price: 20,
     });
