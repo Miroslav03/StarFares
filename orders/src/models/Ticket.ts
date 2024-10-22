@@ -3,7 +3,6 @@ import { OrderStatus } from "@starfares/common";
 import { Order } from "./Order";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
-
 interface TicketAttrs {
     id: string;
     title: string;
@@ -19,6 +18,10 @@ export interface TicketDoc extends mongoose.Document {
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
     build(attrs: TicketAttrs): TicketDoc;
+    findByEvent(data: {
+        id: string;
+        version: number;
+    }): Promise<TicketDoc | null>;
 }
 
 const ticketSchema = new mongoose.Schema(
@@ -45,6 +48,13 @@ const ticketSchema = new mongoose.Schema(
 
 ticketSchema.set("versionKey", "version");
 ticketSchema.plugin(updateIfCurrentPlugin);
+
+ticketSchema.statics.findByEvent = (data: { id: string; version: number }) => {
+    return Ticket.findOne({
+        _id: data.id,
+        version: data.version - 1,
+    });
+};
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
     return new Ticket({
