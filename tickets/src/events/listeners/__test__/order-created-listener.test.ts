@@ -51,3 +51,11 @@ it("acks the message", async () => {
 
     expect(message.ack).toHaveBeenCalled();
 });
+
+it("publishes a ticket updated event", async () => {
+    const { listener, data, message } = await configure();
+
+    await listener.onMessage(data, message);
+
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
