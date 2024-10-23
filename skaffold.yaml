@@ -35,6 +35,14 @@ build:
           - src: src/**/*.ts
             dest: .
       docker:
+        dockerfile: Dockerfile
+    - image: miroslavbg/expiration
+      context: expiration
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
         dockerfile: Dockerfile   
   local:
     push: false
