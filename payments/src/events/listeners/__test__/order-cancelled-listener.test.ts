@@ -9,11 +9,13 @@ const configure = async () => {
 
     const order = Order.build({
         id: new mongoose.Types.ObjectId().toHexString(),
-        version: 0,
+        version: 1,
         userId: new mongoose.Types.ObjectId().toHexString(),
         price: 20,
         status: OrderStatus.Created,
     });
+
+    await order.save();
 
     const data: OrderCancelledEvent["data"] = {
         id: order.id,
