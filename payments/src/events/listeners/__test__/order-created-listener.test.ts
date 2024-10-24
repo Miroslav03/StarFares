@@ -28,7 +28,7 @@ const configure = async () => {
     return { data, listener, message };
 };
 
-it("acks the message", async () => {
+it("order has the right data", async () => {
     const { listener, data, message } = await configure();
 
     await listener.onMessage(data, message);
