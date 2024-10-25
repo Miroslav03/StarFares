@@ -3,6 +3,10 @@ import { app } from "../../app";
 import mongoose from "mongoose";
 import { Order } from "../../models/Order";
 import { OrderStatus } from "@starfares/common";
+import { stripe } from "../../stripe";
+import { Payment } from "../../models/Payment";
+
+jest.mock("../../stripe");
 
 it("returns a 404 when purchasing an order that does not exist", async () => {
     const user = global.signup();
@@ -63,4 +67,38 @@ it("returns a 400 when purchasing a cancelled order", async () => {
             orderId: order.id,
         })
         .expect(400);
+});
+
+it("creates a payment and returns 201", async () => {
+    const userId = new mongoose.Types.ObjectId().toHexString();
+
+    const order = Order.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
+        version: 0,
+        status: OrderStatus.Created,
+        userId: userId,
+        price: 20,
+    });
+
+    await order.save();
+
+    const user = global.signup(userId);
+
+    await request(app)
+        .post(`/api/payments`)
+        .set("Cookie", user)
+        .send({
+            token: "tok_visa", //Test mode stripe acc
+            orderId: order.id,
+        })
+        .expect(201);
+
+    expect(stripe.charges.create).toHaveBeenCalled();
+
+    const payment = await Payment.findOne({
+        orderId: order.id,
+    });
+
+    expect(payment).not.toBeNull();
+    expect(payment!.stripeId).toEqual("some_stripe_id");
 });
