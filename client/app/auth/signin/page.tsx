@@ -12,8 +12,8 @@ export default function SignUp() {
         method: "post",
         body: { email, password },
 
-        onSuccess: () => {
-            mutate("/api/users/currentuser");
+        onSuccess: async () => {
+            await mutate("/api/users/currentuser"); // Revalidate user data
             router.push("/");
         },
     });
