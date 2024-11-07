@@ -1,6 +1,3 @@
-// app/context/AuthContext.tsx
-"use client";
-
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -11,44 +8,40 @@ interface User {
 interface AuthContextType {
     currentUser: User | null;
     setCurrentUser: (user: User | null) => void;
+    refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
     currentUser: null,
     setCurrentUser: () => {},
+    refreshUser: async () => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-    const getUser = async () => {
+    // Function to fetch and update user data
+    const refreshUser = async () => {
         try {
-            console.log("before fetching");
-
-            const response = await axios.get(
-                "/api/users/currentuser",
-                { withCredentials: true }
-            );
-            return response.data;
+            const response = await axios.get("/api/users/currentuser", {
+                withCredentials: true,
+            });
+            setCurrentUser(response.data.currentUser || null);
         } catch (error) {
             console.error("Error fetching user data:", error);
-            return null;
+            setCurrentUser(null);
         }
     };
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            const userData = await getUser();
-            console.log("userData:", userData); 
-            setCurrentUser(userData?.currentUser || null);
-            console.log("currentUser:", currentUser); 
-        };
-
-        fetchUserData();
+        // Fetch user data on initial load
+        refreshUser();
     }, []);
 
     return (
-        <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
+        <AuthContext.Provider
+            value={{ currentUser, setCurrentUser, refreshUser }}
+        >
             {children}
         </AuthContext.Provider>
     );

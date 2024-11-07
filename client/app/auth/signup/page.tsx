@@ -1,19 +1,23 @@
 "use client";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useContext } from "react";
 import useRequest from "@/hooks/useRequest";
 import { useRouter } from "next/navigation";
 import { mutate } from "swr";
+import AuthContext from "@/app/context/AuthContext";
 
 export default function SignUp() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const { refreshUser } = useContext(AuthContext);
+
     const { doRequest, errors } = useRequest({
         url: "/api/users/signup",
         method: "post",
         body: { email, password },
-        onSuccess: () => {
-            mutate("/api/users/currentuser");
+        onSuccess: async () => {
+            await refreshUser(); // Refresh context after successful sign-in
             router.push("/");
         },
     });
