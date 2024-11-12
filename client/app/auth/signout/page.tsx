@@ -3,7 +3,6 @@ import AuthContext from "@/app/context/AuthContext";
 import useRequest from "@/hooks/useRequest";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
-import { mutate } from "swr";
 
 export default function Signout() {
     const router = useRouter();

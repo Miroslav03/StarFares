@@ -2,7 +2,6 @@
 import { useState, FormEvent, useContext } from "react";
 import useRequest from "@/hooks/useRequest";
 import { useRouter } from "next/navigation";
-import { mutate } from "swr";
 import AuthContext from "@/app/context/AuthContext";
 export default function SignUp() {
     const router = useRouter();
