@@ -52,7 +52,7 @@ export default function MyPage() {
                                 href={"/tickets/[ticketId]"}
                                 as={`/tickets/${ticket.id}`}
                             >
-                                <button className="rounded-xl text-[#ffffff] bg-[#000000] text-lg px-4 py-2">Purchase</button>
+                                <button className="rounded-xl text-[#ffffff] bg-[#000000] text-lg px-4 py-2">Details</button>
                             </Link>
                         </div>
                     </div>
