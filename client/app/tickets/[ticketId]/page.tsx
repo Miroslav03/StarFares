@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import useRequest from "@/hooks/useRequest";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import AuthContext from "@/app/context/AuthContext";
 
 interface Ticket {
     id: string;
@@ -12,10 +13,11 @@ interface Ticket {
 
 export default function TicketShow() {
     const { ticketId } = useParams();
-
+    const router = useRouter();
     const [ticket, setTicket] = useState<Ticket | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const { refreshUser } = useContext(AuthContext);
 
     useEffect(() => {
         if (ticketId) {
@@ -41,6 +43,8 @@ export default function TicketShow() {
         method: "post",
         body: { ticketId },
         onSuccess: async (order) => {
+            await refreshUser();
+            router.push(`/orders/${order.id}`);
             console.log(order);
         },
     });
@@ -62,7 +66,7 @@ export default function TicketShow() {
                     </span>
                 </p>
                 <button
-                    onClick={doRequest}
+                    onClick={() => doRequest()}
                     className="mt-4 rounded-xl text-white bg-black text-lg px-4 py-2"
                 >
                     Purchase

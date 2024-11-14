@@ -30,11 +30,15 @@ export default function useRequest({
 }: UseRequestProps) {
     const [errors, setErrors] = useState<JSX.Element | null>(null);
 
-    const doRequest = async (): Promise<UserResponse | void> => {
+    const doRequest = async (props = {}): Promise<UserResponse | void> => {
         try {
-            const response = await axios[method](url, body, {
-                withCredentials: true,
-            });
+            const response = await axios[method](
+                url,
+                { ...body, ...props },
+                {
+                    withCredentials: true,
+                }
+            );
             setErrors(null);
             if (onSuccess) {
                 onSuccess(response.data);
