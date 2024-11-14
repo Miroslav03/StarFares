@@ -16,9 +16,11 @@ export default function Header() {
     console.log('Current user',currentUser);
     
 
-    const authList: JSX.Element[] = [
+    const links: JSX.Element[] = [
         !currentUser && { label: "Sign Up", href: "/auth/signup" },
         !currentUser && { label: "Sign In", href: "/auth/signin" },
+        currentUser && { label: "Create ticket", href: "/tickets/new" },
+        currentUser && { label: "My orders", href: "/orders/all" },
         currentUser && { label: "Sign Out", href: "/auth/signout" },
     ]
         .filter((item): item is AuthLink => Boolean(item))
@@ -38,7 +40,7 @@ export default function Header() {
                 </a>
             </div>
             <div className="navbar-end">
-                {authList}
+                {links}
                 <ThemeToggle />
             </div>
         </div>

@@ -20,7 +20,7 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
             throw new NotFoundError();
         }
 
-        order.set({ staus: OrderStatus.Complete });
+        order.set({ status: OrderStatus.Complete });
         await order.save();
 
         msg.ack();

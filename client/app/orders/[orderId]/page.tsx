@@ -71,8 +71,8 @@ export default function OrderShow() {
         url: "/api/payments",
         method: "post",
         body: order ? { orderId: order!.id } : {},
-        onSuccess: async (payment) => {
-            console.log(payment);
+        onSuccess: async () => {
+            router.push('/orders/all')
         },
     });
 
