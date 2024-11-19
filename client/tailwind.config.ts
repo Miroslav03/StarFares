@@ -8,8 +8,8 @@ const config: Config = {
     ],
     theme: {
         colors: {
-            "main-orange-color": "#ff8d09",
-            "main-yellow-color": "#F2D639",
+            "main-black-color": "#000000",
+            "main-gray-color": "#111111",
         },
         screens: {
             "2xl": { max: "1535px" },
@@ -29,19 +29,12 @@ const config: Config = {
         },
     },
     plugins: [require("daisyui")],
-    daisyui: {
+  /*   daisyui: {
       themes: [
         {
           myDarkTheme: {
-            "primary": "#ffffff",    // Customize primary color
-            "secondary": "#4b5563",  // Customize secondary color
-            "accent": "#22d3ee",     // Customize accent color
-            "neutral": "#111827",    // Customize neutral color
-            "base-100": "#000000",   // Background color (main dark background)
-            "info": "#3abff8",       // Info color
-            "success": "#36d399",    // Success color
-            "warning": "#fbbd23",    // Warning color
-            "error": "#f87272",      // Error color
+            "primary": "#111111",    // Customize primary color
+           // Error color
           },
           myLightTheme: {
             "primary": "#ffffff",    // Customize primary color
@@ -56,6 +49,6 @@ const config: Config = {
           },
         },
       ],
-    },
+    }, */
 };
 export default config;

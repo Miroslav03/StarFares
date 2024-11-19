@@ -46,7 +46,7 @@ export default function NewTicket() {
                     <div className="flex flex-col gap-2">
                         <label
                             htmlFor="email"
-                            className="text-sm text-[#444444]"
+                            className="text-sm text-[#ffffff]"
                         >
                             Title
                         </label>
@@ -56,14 +56,14 @@ export default function NewTicket() {
                             id="title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            className="bg-[#f8f8f8] h-[2.4rem] rounded-[.5rem] pl-4 focus:outline-none focus:ring-2 focus:ring-[#f2e817]"
+                            className="bg-[#f8f8f8] h-[2.4rem] rounded-[.5rem] pl-4 focus:outline-none focus:ring-2 text-main-black-color focus:ring-[#ffffff]"
                             placeholder="Titanic"
                         />
                     </div>
                     <div className="flex flex-col gap-2 mt-3">
                         <label
                             htmlFor="password"
-                            className="text-sm text-[#444444]"
+                            className="text-sm text-[#ffffff]"
                         >
                             Price
                         </label>
@@ -74,7 +74,7 @@ export default function NewTicket() {
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             onBlur={roundValue}
-                            className="bg-[#f8f8f8] h-[2.4rem] rounded-[.5rem] pl-4 focus:outline-none focus:ring-2 focus:ring-[#f2e817]"
+                            className="bg-[#f8f8f8] h-[2.4rem] rounded-[.5rem] pl-4 focus:outline-none focus:ring-2 text-main-black-color focus:ring-[#ffffff]"
                             placeholder="123"
                         />
                     </div>
@@ -84,7 +84,7 @@ export default function NewTicket() {
                     <div>
                         <button
                             style={{ color: "white" }}
-                            className="bg-gradient-to-r from-[#ff8d09] to-[#f2e817] h-[2.4rem] w-full text-sm rounded-[.5rem] font-semibold uppercase mt-6 "
+                            className="bg-main-gray-color h-[2.4rem] w-full text-sm rounded-[.5rem] font-semibold uppercase mt-6 "
                         >
                             Create
                         </button>

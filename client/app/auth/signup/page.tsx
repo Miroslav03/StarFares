@@ -36,7 +36,7 @@ export default function SignUp() {
                     <div className="flex flex-col gap-2">
                         <label
                             htmlFor="email"
-                            className="text-sm text-[#444444]"
+                            className="text-sm text-[#ffffff]"
                         >
                             Email:
                         </label>
@@ -46,14 +46,14 @@ export default function SignUp() {
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="bg-[#f8f8f8] h-[2.4rem] rounded-[.5rem] pl-4 focus:outline-none focus:ring-2 focus:ring-[#f2e817]"
+                            className="bg-[#f8f8f8] h-[2.4rem] rounded-[.5rem] pl-4 focus:outline-none focus:ring-2 focus:ring-[#ffffff] text-main-black-color"
                             placeholder="john@email.com"
                         />
                     </div>
                     <div className="flex flex-col gap-2 mt-3">
                         <label
                             htmlFor="password"
-                            className="text-sm text-[#444444]"
+                            className="text-sm text-[#ffffff]"
                         >
                             Password
                         </label>
@@ -63,23 +63,23 @@ export default function SignUp() {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="bg-[#f8f8f8] h-[2.4rem] rounded-[.5rem] pl-4 focus:outline-none focus:ring-2 focus:ring-[#f2e817]"
+                            className="bg-[#f8f8f8] h-[2.4rem] rounded-[.5rem] pl-4 focus:outline-none focus:ring-2 focus:ring-[#ffffff] text-main-black-color"
                             placeholder="********"
                         />
                     </div>
-                    <div className="text-[#ff2c2c] text-center text-[0.8rem] mt-1 font-semibold">
+                    <div className="text-[#ffffff] text-center text-[0.8rem] mt-3 font-semibold">
                         {errors}
                     </div>
                     <div>
                         <button
                             style={{ color: "white" }}
-                            className="bg-gradient-to-r from-[#ff8d09] to-[#f2e817] h-[2.4rem] w-full text-sm rounded-[.5rem] font-semibold uppercase mt-6 "
+                            className="bg-main-gray-color h-[2.4rem] w-full text-sm rounded-[.5rem] font-semibold uppercase mt-6 "
                         >
                             Sign Up
                         </button>
                         <h2 className="mt-3 text-center">
                             Have an account?
-                            <span className="text-[#f2e817] ml-2">SIGN IN</span>
+                            <span className="text-[#ffffff] ml-2">SIGN IN</span>
                         </h2>
                     </div>
                 </form>

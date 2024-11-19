@@ -13,8 +13,7 @@ interface AuthLink {
 
 export default function Header() {
     const { currentUser } = useContext(AuthContext);
-    console.log('Current user',currentUser);
-    
+    console.log("Current user", currentUser);
 
     const links: JSX.Element[] = [
         !currentUser && { label: "Sign Up", href: "/auth/signup" },
@@ -31,17 +30,18 @@ export default function Header() {
         ));
 
     return (
-        <div className="navbar bg-base-100">
-            <div className="navbar-start">
-            </div>
-            <div className="navbar-center">
-                <a className="btn btn-ghost text-xl text-main-yellow-color">
+        <div className="flex justify-between items-center bg-main-black-color py-6 px-4">
+            <div className="">
+                <Link
+                    href={"/"}
+                    className=" text-4xl font-semibold"
+                >
                     StarFares
-                </a>
+                </Link>
             </div>
-            <div className="navbar-end">
+            <div className="flex text-xl text-[#ffffff]">
                 {links}
-                <ThemeToggle />
+                {/*  <ThemeToggle /> */}
             </div>
         </div>
     );

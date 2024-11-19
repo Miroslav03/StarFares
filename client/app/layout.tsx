@@ -20,7 +20,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" data-theme="myDarkTheme">
+        <html lang="en" className="bg-main-black-color" >
             <body className={inter.className}>
                 <AuthProvider>
                     <Header />

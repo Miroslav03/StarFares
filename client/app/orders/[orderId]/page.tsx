@@ -90,7 +90,7 @@ export default function OrderShow() {
             <div className="bg-white p-6 rounded-lg shadow-lg w-[60%]">
                 <p className="text-lg text-gray-700">
                     Time left to pay:
-                    <span className="text-main-orange-color font-bold text-xl">
+                    <span  className="text-[#ffffff] font-bold text-xl">
                         {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
                     </span>
                 </p>

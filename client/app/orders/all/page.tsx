@@ -43,13 +43,31 @@ export default function AllOrders() {
     if (error) return <h1>{error}</h1>;
 
     return (
-        <div className="w-full min-h-[550px] mt-20 flex justify-center">
-            <div className="grid grid-cols-3 gap-x-6 w-[60%]">
+        <div className="w-full min-h-[100px] mt-20 flex justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[70%]">
                 {orders.map((order: Order) => (
-                    <div className="bg-[#ffffff] rounded-lg  h-36 border-gra">
-                        <h1>
-                            {order.ticket.title} - {order.status}
-                        </h1>
+                    <div
+                        key={order.id}
+                        className="bg-main-gray-color p-4 rounded-lg shadow-lg border-2 border-[#ffffff] flex flex-col justify-between"
+                    >
+                        {/* Order Details */}
+                        <div className="flex flex-col gap-2">
+                            <h1 className="text-xl font-semibold text-[#ffffff]">
+                                {order.ticket.title}
+                            </h1>
+                            <p className="text-md text-[#ffffff]">
+                                Status:{" "}
+                                <span
+                                    className={`font-bold ${
+                                        order.status === "Completed"
+                                            ? "text-green-500"
+                                            : "text-main-orange-color"
+                                    }`}
+                                >
+                                    {order.status}
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 ))}
             </div>

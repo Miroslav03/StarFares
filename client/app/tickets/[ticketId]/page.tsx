@@ -54,23 +54,27 @@ export default function TicketShow() {
     if (!ticket) return <h1>Ticket not found</h1>;
 
     return (
-        <div className="w-full min-h-[550px] mt-20 flex justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-[60%]">
-                <h1 className="text-2xl font-bold text-black">
+        <div className="w-full min-h-[100px] mt-20 flex justify-center">
+            <div className="bg-main-gray-color p-6 rounded-lg shadow-lg w-[60%] flex flex-col gap-6 border-2 border-[#ffffff]">
+                <h1 className="text-3xl font-semibold text-[#ffffff]">
                     {ticket.title}
                 </h1>
-                <p className="text-lg text-gray-700">
-                    Price:
+
+                <p className="text-lg text-[#ffffff]">
+                    Price:{" "}
                     <span className="text-main-orange-color font-bold text-xl">
-                        {ticket.price}
+                        {ticket.price}$
                     </span>
                 </p>
-                <button
-                    onClick={() => doRequest()}
-                    className="mt-4 rounded-xl text-white bg-black text-lg px-4 py-2"
-                >
-                    Purchase
-                </button>
+
+                <div className="flex justify-end">
+                    <button
+                        onClick={() => doRequest()}
+                        className="rounded-xl text-[#ffffff] bg-[#000000] text-lg px-6 py-3 hover:bg-gray-800 transition duration-300"
+                    >
+                        Purchase
+                    </button>
+                </div>
             </div>
         </div>
     );
